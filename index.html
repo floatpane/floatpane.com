@@ -1,385 +1,429 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>floatpane - Lightweight Wallpaper Selector</title>
-    <!-- External Fonts and Libraries -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="https://github.com/floatpane/floatpane/raw/master/assets/icon.svg"
-    />
-    <!-- Meta Tags for SEO and Social Sharing -->
-    <meta
-      name="description"
-      content="A lightweight, floating wallpaper selector for macOS. Designed to work seamlessly with tiling window managers like Aerospace and yabai."
-    />
-    <meta
-      name="keywords"
-      content="floatpane, macOS, wallpaper selector, tiling window manager, Aerospace, yabai, Electron, React"
-    />
-    <meta name="author" content="andrinoff" />
-    <meta
-      property="og:title"
-      content="floatpane - Lightweight Wallpaper Selector for macOS"
-    />
-    <meta
-      property="og:description"
-      content="A lightweight, floating wallpaper selector for macOS. Designed to work seamlessly with tiling window managers like Aerospace and yabai."
-    />
-    <meta
-      property="og:image"
-      content="https://github.com/floatpane/floatpane/raw/master/assets/icon.svg"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header>
-      <nav class="container">
-        <div class="logo">
-          <svg
-            width="48"
-            height="48"
-            viewBox="0 0 32 32"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect width="32" height="32" rx="6" fill="none" />
-            <g
-              stroke="#ffffff"
-              stroke-width="1.5"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M5 16.5l9-4.5-2 11.5 3-4.5 5 2-8-14Z" />
-              <path d="M7 22c2-2.5 4-2.5 6 0s4 2.5 6 0" />
-            </g>
-          </svg>
-          <span>floatpane</span>
-        </div>
-        <ul class="nav-links">
-          <li><a href="#features">Features</a></li>
-          <li><a href="#installation">Installation</a></li>
-          <li><a href="https://github.com/floatpane/floatpane">GitHub</a></li>
-        </ul>
-      </nav>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div class="container">
-          <h1>floatpane</h1>
-          <div class="css-typing">
-            <p>The Ultimate</p>
-            <p>macOS Wallpaper Manager.</p>
-          </div>
-
-          <div class="badges">
-            <span class="badge">MIT License</span>
-            <span class="badge">macOS & Windows</span>
-            <span class="badge">Electron + React</span>
-            <span class="badge">⭐ <span id="github-stars">...</span></span>
-          </div>
-
-          <a href="#installation" class="download-btn" id="download-link">
-            <span>⬇</span>
-            Download Latest (<span id="latest-version">...</span>)
-          </a>
-        </div>
-      </section>
-
-      <section class="demo">
-        <div class="container">
-          <h2>Live Preview</h2>
-          <div class="demo-terminal">
-            <div class="terminal-header">
-              <div class="terminal-dots">
-                <div class="terminal-dot red"></div>
-                <div class="terminal-dot yellow"></div>
-                <div class="terminal-dot green"></div>
-              </div>
-            </div>
-            <div class="terminal-body">
-              <div class="command-line">
-                <span class="prompt">~ $</span>
-                <span class="command">open -a floatpane</span>
-              </div>
-              <div class="output">
-                Launching floatpane... <br />
-                Press Cmd+Shift+P to toggle the selector.
-              </div>
-
-              <!-- --- START: Updated Demo Preview Section --- -->
-              <div class="demo-preview">
-                <div class="floating-window">
-                  <div class="wallpaper-grid">
-                    <!-- Placeholder images are used here. You can replace the URLs. -->
-                    <div
-                      class="wallpaper-thumb"
-                      style="
-                        background-image: url('https://github.com/andrinoff/wallpapers/blob/master/1033287.jpg?raw=true');
-                      "
-                      onerror="this.style.backgroundColor='var(--bg-tertiary)'"
-                    ></div>
-                    <div
-                      class="wallpaper-thumb"
-                      style="
-                        background-image: url('https://github.com/andrinoff/wallpapers/blob/master/1322321.jpeg?raw=true');
-                      "
-                      onerror="this.style.backgroundColor='var(--bg-tertiary)'"
-                    ></div>
-                    <div
-                      class="wallpaper-thumb"
-                      style="
-                        background-image: url('https://github.com/andrinoff/wallpapers/blob/master/1351579.png?raw=true');
-                      "
-                      onerror="this.style.backgroundColor='var(--bg-tertiary)'"
-                    ></div>
-                    <div
-                      class="wallpaper-thumb active"
-                      style="
-                        background-image: url('https://github.com/andrinoff/wallpapers/blob/master/1351639.png?raw=true');
-                      "
-                      onerror="this.style.backgroundColor='var(--bg-tertiary)'"
-                    ></div>
-                  </div>
-                  <div class="demo-footer">
-                    <div class="demo-version">v1.4.8</div>
-                    <div class="demo-icons">
-                      <!-- Settings Icon -->
-                      <svg
-                        class="demo-icon"
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>floatpane - Lightweight Wallpaper Selector</title>
+        <!-- External Fonts and Libraries -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="https://github.com/floatpane/floatpane/raw/master/assets/icon.svg"
+        />
+        <!-- Meta Tags for SEO and Social Sharing -->
+        <meta
+            name="description"
+            content="A lightweight, floating wallpaper selector for macOS. Designed to work seamlessly with tiling window managers like Aerospace and yabai."
+        />
+        <meta
+            name="keywords"
+            content="floatpane, macOS, wallpaper selector, tiling window manager, Aerospace, yabai, Electron, React"
+        />
+        <meta name="author" content="andrinoff" />
+        <meta
+            property="og:title"
+            content="floatpane - Lightweight Wallpaper Selector for macOS"
+        />
+        <meta
+            property="og:description"
+            content="A lightweight, floating wallpaper selector for macOS. Designed to work seamlessly with tiling window managers like Aerospace and yabai."
+        />
+        <meta
+            property="og:image"
+            content="https://github.com/floatpane/floatpane/raw/master/assets/icon.svg"
+        />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <header>
+            <nav class="container">
+                <div class="logo">
+                    <svg
+                        width="48"
+                        height="48"
+                        viewBox="0 0 32 32"
                         xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path
-                          d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 0 2l-.15.08a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1 0-2l.15-.08a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
-                        ></path>
-                        <circle cx="12" cy="12" r="3"></circle>
-                      </svg>
-                      <!-- Folder Icon -->
-                      <svg
-                        class="demo-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path
-                          d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"
-                        ></path>
-                      </svg>
-                      <!-- GitHub Icon -->
-                      <svg
-                        class="demo-icon"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path
-                          d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-                        ></path>
-                      </svg>
-                    </div>
-                  </div>
+                    >
+                        <rect width="32" height="32" rx="6" fill="none" />
+                        <g
+                            stroke="#ffffff"
+                            stroke-width="1.5"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M5 16.5l9-4.5-2 11.5 3-4.5 5 2-8-14Z" />
+                            <path d="M7 22c2-2.5 4-2.5 6 0s4 2.5 6 0" />
+                        </g>
+                    </svg>
+                    <span>floatpane</span>
                 </div>
-              </div>
-              <!-- --- END: Updated Demo Preview Section --- -->
-            </div>
-          </div>
-        </div>
-      </section>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#installation">Installation</a></li>
+                    <li>
+                        <a href="https://github.com/floatpane/floatpane"
+                            >GitHub</a
+                        >
+                    </li>
+                </ul>
+            </nav>
+        </header>
 
-      <section class="features" id="features">
-        <div class="container">
-          <h2>Features</h2>
-          <div class="features-grid">
-            <div class="feature-card">
-              <div class="feature-icon">🖼️</div>
-              <h3>Instant Preview</h3>
-              <p>
-                Quickly preview wallpapers in a floating window without
-                interrupting your workflow.
-              </p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">⚡</div>
-              <h3>Blazing Fast</h3>
-              <p>
-                Built with performance in mind. Generates thumbnails on the fly
-                for a smooth experience.
-              </p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">🧭</div>
-              <h3>Tiling WM Friendly</h3>
-              <p>
-                Built to coexist peacefully with tiling window managers like
-                yabai and Aerospace.
-              </p>
-            </div>
-            <div class="feature-card">
-              <div class="feature-icon">⌨️</div>
-              <h3>Keyboard Driven</h3>
-              <p>
-                Navigate, select, and set wallpapers without ever touching your
-                mouse.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+        <main>
+            <section class="hero">
+                <div class="container">
+                    <h1>floatpane</h1>
+                    <div class="css-typing">
+                        <p>The Ultimate</p>
+                        <p>macOS Wallpaper Manager.</p>
+                    </div>
 
-      <section class="installation" id="installation">
-        <div class="container">
-          <h2>Installation for macOS</h2>
-          <h3 style="text-align: center; margin-bottom: 2rem">
-            Install with Homebrew (Recommended)
-          </h3>
-          <div class="demo-terminal" style="max-width: 800px; margin: 0 auto">
-            <div class="terminal-header">
-              <div class="terminal-dots">
-                <div class="terminal-dot red"></div>
-                <div class="terminal-dot yellow"></div>
-                <div class="terminal-dot green"></div>
-              </div>
-              <button
-                class="copy-btn header-copy-btn"
-                data-clipboard-text="brew tap floatpane/floatpane && brew install floatpane && xattr -cr /Applications/floatpane.app"
-                aria-label="Copy install commands"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path
-                    d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-                  ></path>
-                </svg>
-                <span>Copy All</span>
-              </button>
-            </div>
-            <div class="terminal-body">
-              <div class="command-line">
-                <span class="prompt">~ $</span>
-                <span class="command">brew tap floatpane/floatpane</span>
-              </div>
-              <div class="command-line">
-                <span class="prompt">~ $</span>
-                <span class="command">brew install floatpane</span>
-              </div>
-              <div class="command-line">
-                <span class="prompt">~ $</span>
-                <span class="command"
-                  >xattr -cr /Applications/floatpane.app</span
-                >
-              </div>
-            </div>
-          </div>
-          <h3 style="text-align: center; margin-top: 3rem; margin-bottom: 2rem">
-            Or, Manually Install
-          </h3>
-          <div class="install-steps">
-            <div class="install-step">
-              <div class="step-number">1</div>
-              <div class="step-content">
-                <h3>Download</h3>
-                <p>
-                  Grab the latest <code>.dmg</code> from the
-                  <a
-                    href="https://github.com/floatpane/floatpane/releases"
-                    id="install-link"
-                    >releases page</a
-                  >.
-                </p>
-              </div>
-            </div>
-            <div class="install-step">
-              <div class="step-number">2</div>
-              <div class="step-content">
-                <h3>Install</h3>
-                <p>
-                  Open the <code>.dmg</code> and drag
-                  <strong>floatpane.app</strong> into your
-                  <code>/Applications</code> folder.
-                </p>
-              </div>
-            </div>
-            <div class="install-step">
-              <div class="step-number">3</div>
-              <div class="step-content">
-                <h3>Launch</h3>
-                <p>
-                  Use the global shortcut <code>Cmd+Shift+P</code> to launch
-                  floatpane anytime.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                    <div class="badges">
+                        <span class="badge">MIT License</span>
+                        <span class="badge">macOS & Windows</span>
+                        <span class="badge">Electron + React</span>
+                        <span class="badge"
+                            >⭐ <span id="github-stars">...</span></span
+                        >
+                    </div>
 
-      <section class="installation-windows" id="installation-windows">
-        <div class="container">
-          <h2>Installation for Windows</h2>
-          <div class="install-steps">
-            <div class="install-step">
-              <div class="step-number">1</div>
-              <div class="step-content">
-                <h3>Download the installer</h3>
-                <p>
-                  Visit the latest releases
-                  <a
-                    id="windows-install-link"
-                    href="https://github.com/floatpane/floatpane-windows"
-                    >floatpane client for windows</a
-                  >, a beta version is available.
-                </p>
-              </div>
+                    <a
+                        href="#installation"
+                        class="download-btn"
+                        id="download-link"
+                    >
+                        <span>⬇</span>
+                        Download Latest (<span class="latest-version">...</span
+                        >)
+                    </a>
+                </div>
+            </section>
+
+            <section class="demo">
+                <div class="container">
+                    <h2>Live Preview</h2>
+                    <div class="demo-terminal">
+                        <div class="terminal-header">
+                            <div class="terminal-dots">
+                                <div class="terminal-dot red"></div>
+                                <div class="terminal-dot yellow"></div>
+                                <div class="terminal-dot green"></div>
+                            </div>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="command-line">
+                                <span class="prompt">~ $</span>
+                                <span class="command">open -a floatpane</span>
+                            </div>
+                            <div class="output">
+                                Launching floatpane... <br />
+                                Press Cmd+Shift+P to toggle the selector.
+                            </div>
+
+                            <!-- --- START: Updated Demo Preview Section --- -->
+                            <div class="demo-preview">
+                                <div class="floating-window">
+                                    <div class="wallpaper-grid">
+                                        <!-- Placeholder images are used here. You can replace the URLs. -->
+                                        <div
+                                            class="wallpaper-thumb"
+                                            style="
+                                                background-image: url(&quot;https://github.com/andrinoff/wallpapers/blob/master/1033287.jpg?raw=true&quot;);
+                                            "
+                                            onerror="
+                                                this.style.backgroundColor =
+                                                    'var(--bg-tertiary)'
+                                            "
+                                        ></div>
+                                        <div
+                                            class="wallpaper-thumb"
+                                            style="
+                                                background-image: url(&quot;https://github.com/andrinoff/wallpapers/blob/master/1322321.jpeg?raw=true&quot;);
+                                            "
+                                            onerror="
+                                                this.style.backgroundColor =
+                                                    'var(--bg-tertiary)'
+                                            "
+                                        ></div>
+                                        <div
+                                            class="wallpaper-thumb"
+                                            style="
+                                                background-image: url(&quot;https://github.com/andrinoff/wallpapers/blob/master/1351579.png?raw=true&quot;);
+                                            "
+                                            onerror="
+                                                this.style.backgroundColor =
+                                                    'var(--bg-tertiary)'
+                                            "
+                                        ></div>
+                                        <div
+                                            class="wallpaper-thumb active"
+                                            style="
+                                                background-image: url(&quot;https://github.com/andrinoff/wallpapers/blob/master/1351639.png?raw=true&quot;);
+                                            "
+                                            onerror="
+                                                this.style.backgroundColor =
+                                                    'var(--bg-tertiary)'
+                                            "
+                                        ></div>
+                                    </div>
+                                    <div class="demo-footer">
+                                        <span id="demo-version">...</span>
+                                        <div class="demo-icons">
+                                            <!-- Settings Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-settings-icon lucide-settings"
+                                            >
+                                                <path
+                                                    d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"
+                                                />
+                                                <circle cx="12" cy="12" r="3" />
+                                            </svg>
+                                            <!-- Folder Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-folder-icon lucide-folder"
+                                            >
+                                                <path
+                                                    d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"
+                                                />
+                                            </svg>
+                                            <!-- GitHub Icon -->
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="lucide lucide-github-icon lucide-github"
+                                            >
+                                                <path
+                                                    d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                                                />
+                                                <path
+                                                    d="M9 18c-4.51 2-5-2-7-2"
+                                                />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- --- END: Updated Demo Preview Section --- -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="features" id="features">
+                <div class="container">
+                    <h2>Features</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🖼️</div>
+                            <h3>Instant Preview</h3>
+                            <p>
+                                Quickly preview wallpapers in a floating window
+                                without interrupting your workflow.
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h3>Blazing Fast</h3>
+                            <p>
+                                Built with performance in mind. Generates
+                                thumbnails on the fly for a smooth experience.
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">🧭</div>
+                            <h3>Tiling WM Friendly</h3>
+                            <p>
+                                Built to coexist peacefully with tiling window
+                                managers like yabai and Aerospace.
+                            </p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">⌨️</div>
+                            <h3>Keyboard Driven</h3>
+                            <p>
+                                Navigate, select, and set wallpapers without
+                                ever touching your mouse.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="installation" id="installation">
+                <div class="container">
+                    <h2>Installation for macOS</h2>
+                    <h3 style="text-align: center; margin-bottom: 2rem">
+                        Install with Homebrew (Recommended)
+                    </h3>
+                    <div
+                        class="demo-terminal"
+                        style="max-width: 800px; margin: 0 auto"
+                    >
+                        <div class="terminal-header">
+                            <div class="terminal-dots">
+                                <div class="terminal-dot red"></div>
+                                <div class="terminal-dot yellow"></div>
+                                <div class="terminal-dot green"></div>
+                            </div>
+                            <button
+                                class="copy-btn header-copy-btn"
+                                data-clipboard-text="brew tap floatpane/floatpane && brew install floatpane"
+                                aria-label="Copy install commands"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <rect
+                                        x="9"
+                                        y="9"
+                                        width="13"
+                                        height="13"
+                                        rx="2"
+                                        ry="2"
+                                    ></rect>
+                                    <path
+                                        d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                                    ></path>
+                                </svg>
+                                <span>Copy All</span>
+                            </button>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="command-line">
+                                <span class="prompt">~ $</span>
+                                <span class="command"
+                                    >brew tap floatpane/floatpane</span
+                                >
+                            </div>
+                            <div class="command-line">
+                                <span class="prompt">~ $</span>
+                                <span class="command"
+                                    >brew install floatpane</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <h3
+                        style="
+                            text-align: center;
+                            margin-top: 3rem;
+                            margin-bottom: 2rem;
+                        "
+                    >
+                        Or, Manually Install
+                    </h3>
+                    <div class="install-steps">
+                        <div class="install-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Download</h3>
+                                <p>
+                                    Grab the latest <code>.dmg</code> from the
+                                    <a
+                                        href="https://github.com/floatpane/floatpane/releases"
+                                        id="install-link"
+                                        >releases page</a
+                                    >.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="install-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Install</h3>
+                                <p>
+                                    Open the <code>.dmg</code> and drag
+                                    <strong>floatpane.app</strong> into your
+                                    <code>/Applications</code> folder.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="install-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Verify</h3>
+                                <p>
+                                    Enter
+                                    <code
+                                        >xattr -cr
+                                        /Applications/floatpane.app</code
+                                    >
+                                    in your terminal to bypass Apple Gatekeeper.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="installation-windows" id="installation-windows">
+                <div class="container">
+                    <h2>Installation for Windows</h2>
+                    <div class="install-steps">
+                        <div class="install-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Download the installer</h3>
+                                <p>
+                                    Visit the latest releases
+                                    <a
+                                        id="windows-install-link"
+                                        href="https://github.com/floatpane/floatpane-windows"
+                                        >floatpane client for windows</a
+                                    >, a beta version is available.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container footer-content">
+                <p>&copy; 2026 floatpane. MIT Licensed.</p>
             </div>
-          </div>
-        </div>
-      </section>
-    </main>
+        </footer>
 
-    <footer>
-      <div class="container footer-content">
-        <p>&copy; 2025 floatpane. MIT Licensed.</p>
-      </div>
-    </footer>
-
-    <script src="script.js"></script>
-  </body>
+        <script src="script.js"></script>
+    </body>
 </html>

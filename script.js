@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const macOSRepo = "floatpane/floatpane";
   const windowsRepo = "floatpane/floatpane-windows";
   const versionSpan = document.getElementById("latest-version");
-  const demoVersionSpan = document.querySelector("demo-version");
+  const demoVersionSpan = document.getElementById("demo-version");
   const downloadLink = document.getElementById("download-link");
   const installLink = document.getElementById("install-link");
   const windowsInstallLink = document.getElementById("windows-install-link");
@@ -27,15 +27,14 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       // Fetch macOS release info
       const macOSReleaseResponse = await fetch(
-        `https://api.github.com/repos/${macOSRepo}/releases/latest`
+        `https://api.github.com/repos/floatpane/floatpane/releases/latest`,
       );
       if (macOSReleaseResponse.ok) {
         const releaseData = await macOSReleaseResponse.json();
         const latestVersion = releaseData.tag_name;
         const releaseUrl = releaseData.html_url;
-
-        if (versionSpan) versionSpan.textContent = latestVersion;
         if (demoVersionSpan) demoVersionSpan.textContent = latestVersion;
+        if (versionSpan) versionSpan.textContent = latestVersion;
         if (downloadLink) downloadLink.href = releaseUrl;
         if (installLink) installLink.href = releaseUrl;
       }
@@ -43,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Fetch Windows release info
       try {
         const windowsReleaseResponse = await fetch(
-          `https://api.github.com/repos/${windowsRepo}/releases/latest`
+          `https://api.github.com/repos/${windowsRepo}/releases/latest`,
         );
         if (windowsReleaseResponse.ok && windowsInstallLink) {
           const windowsReleaseData = await windowsReleaseResponse.json();
@@ -55,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Fetch repo info for stars (using macOS repo)
       const repoResponse = await fetch(
-        `https://api.github.com/repos/${macOSRepo}`
+        `https://api.github.com/repos/${macOSRepo}`,
       );
       if (repoResponse.ok) {
         const repoData = await repoResponse.json();
