@@ -35,6 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const releaseUrl = releaseData.html_url;
         if (demoVersionSpan) demoVersionSpan.textContent = latestVersion;
         if (versionSpan) versionSpan.textContent = latestVersion;
+
         if (downloadLink) downloadLink.href = releaseUrl;
         if (installLink) installLink.href = releaseUrl;
       }
